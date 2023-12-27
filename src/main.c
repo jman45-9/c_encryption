@@ -9,6 +9,13 @@
 int main(int argc, char **argv)
 {
     ARGS *args = parseArgs(argc, argv);
+
+    if (args->targetFile == NULL)
+       {
+        fprintf(stderr, "FATAL. NO TARGET FILE ENTERED, CHECK ARGUMENTS. ERR-000.\n");
+        exit(1);
+       }
+
     if(args->doEncrypt)
         encryptTarget(args->targetFile, args->keyFile);
     
