@@ -12,7 +12,7 @@ typedef struct args ARGS;
 struct args 
 {
     char *targetFile;
-    char *keyFile;
+    char *cypherFile;
     char *outputFile;
     int doEncrypt;
 };

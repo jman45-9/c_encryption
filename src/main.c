@@ -17,7 +17,7 @@ int main(int argc, char **argv)
        }
 
     if(args->doEncrypt)
-        encryptTarget(args->targetFile, args->keyFile, args->outputFile);
+        encryptTarget(args->targetFile, args->cypherFile, args->outputFile);
     
     return 0;
 }
@@ -27,7 +27,7 @@ ARGS *parseArgs(int argc, char **argv)
     int checkValue;
     ARGS *args = malloc(sizeof(ARGS));
     args->targetFile = NULL;
-    args->keyFile = NULL;
+    args->cypherFile = NULL;
     args->outputFile = "encryptionOutput.bin";
     args->doEncrypt = 1;
 
@@ -38,11 +38,11 @@ ARGS *parseArgs(int argc, char **argv)
         if (!strcmp(*(argv+checkValue), "--target-file"))
             args->targetFile = *(argv+checkValue+1);
 
-        if (!strcmp(*(argv+checkValue), "--key-file"))
-            args->keyFile = *(argv+checkValue+1);
+        if (!strcmp(*(argv+checkValue), "--cypher-file"))
+            args->cypherFile = *(argv+checkValue+1);
 
         if (!strcmp(*(argv + checkValue), "-o"))
-            args->keyFile = *(argv+checkValue+1);
+            args->outputFile = *(argv+checkValue+1);
 
         if (!strcmp(*(argv+checkValue), "--decrypt"))
             args->doEncrypt = 0;

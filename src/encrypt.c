@@ -12,11 +12,11 @@
  * @param targetName - name of file to be encrypted
  * @param keyName - name of file containg encryption key, pass NULL is no file exists
 */
-void encryptTarget(char *targetName, char *keyName, char *outputName)
+void encryptTarget(char *targetName, char *cypherName, char *outputName)
 {
     int *cypher;
-    if (keyName == NULL)
-        cypher = generateKey();
+    if (cypherName == NULL)
+        cypher = generateCypher();
     /*
      * else
      * add code to read keyName here
@@ -29,10 +29,10 @@ void encryptTarget(char *targetName, char *keyName, char *outputName)
         free(cypher);
         exit(1);
     }
-    FILE *outputFile = fopen(outputName, "wb");
-    if (targetFile == NULL)
+    FILE *outputFile = fopen(outputName, "wbx");
+    if (outputFile == NULL)
     {
-        fprintf(stderr, "FATAL. FAILED TO CREATE OUTPUT FILE. USR-ERR-002.\n");
+        fprintf(stderr, "FATAL. FAILED TO CREATE OUTPUT FILE, CHECK IF FILE ALREADY EXISTS. USR-ERR-002.\n");
         free(cypher);
         fclose(targetFile);
         exit(1);
@@ -43,7 +43,8 @@ void encryptTarget(char *targetName, char *keyName, char *outputName)
         int charValue = fgetc(targetFile);
         if (charValue == EOF)
             break;
-        printf("test: %d\n", charValue);
+        int cypherOutput = *(cypher + charValue);
+        fwrite(&cypherOutput, sizeof(cypherOutput), 1, outputFile);
     }
 
     fclose(targetFile);
@@ -51,7 +52,7 @@ void encryptTarget(char *targetName, char *keyName, char *outputName)
     free(cypher);
 }
 
-int *generateKey()
+int *generateCypher()
 {
     CSPRNG rng = csprng_create(rng); //ignore warning on this line :)
     if(!rng)
