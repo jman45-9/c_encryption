@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../src/duthomhas/csprng.h"
+#include "encrypt.h"
 
 typedef struct args ARGS;
 

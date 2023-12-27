@@ -1,20 +1,17 @@
+/*
+ * Filename: main.c
+ * Purpose: main driver for application
+ * Author Jeremy Cope
+ * copyright: 2023 Jeremy Cope
+*/
 #include "../header/main.h"
 
 int main(int argc, char **argv)
 {
-
+    ARGS *args = parseArgs(argc, argv);
+    if(args->doEncrypt)
+        encryptTarget(args->targetFile, args->keyFile);
     
-    CSPRNG rng = csprng_create( rng ); //ignore warning on this line
-    if(!rng)
-    {
-        fprintf(stderr, "CSPRNG INIT FAILED ERR-000");
-        exit(1);
-    }
-
-    printf("test: %ld\n", csprng_get_int(rng));
-
-
-    rng = csprng_destroy(rng);
     return 0;
 }
 
@@ -33,11 +30,13 @@ ARGS *parseArgs(int argc, char **argv)
         if (!strcmp(*(argv+checkValue), "--target-file"))
             args->targetFile = *(argv+checkValue+1);
 
+        if (!strcmp(*(argv+checkValue), "--key-file"))
+            args->keyFile = *(argv+checkValue+1);
+
         if (!strcmp(*(argv+checkValue), "--decrypt"))
             args->doEncrypt = 0;
 
-        //later add code to parse a key file too
-    }
+            }
     return args;
 }
 
