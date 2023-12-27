@@ -23,7 +23,28 @@ void encryptTarget(char *targetName, char *keyName, char *outputName)
     */
 
     FILE *targetFile = fopen(targetName, "r");
+    if (targetFile == NULL)
+    {
+        fprintf(stderr, "FATAL. NO TARGET FILE FOUND. USR-ERR-001.\n");
+        free(cypher);
+        exit(1);
+    }
     FILE *outputFile = fopen(outputName, "wb");
+    if (targetFile == NULL)
+    {
+        fprintf(stderr, "FATAL. FAILED TO CREATE OUTPUT FILE. USR-ERR-002.\n");
+        free(cypher);
+        fclose(targetFile);
+        exit(1);
+    }
+
+    while(1)
+    {
+        int charValue = fgetc(targetFile);
+        if (charValue == EOF)
+            break;
+        printf("test: %d\n", charValue);
+    }
 
     fclose(targetFile);
     fclose(outputFile);
@@ -35,7 +56,7 @@ int *generateKey()
     CSPRNG rng = csprng_create(rng); //ignore warning on this line :)
     if(!rng)
     {
-        fprintf(stderr, "FATAL. NO CSPRNG FOUND! INTERNAL-ERR-000");
+        fprintf(stderr, "FATAL. NO CSPRNG FOUND. INTERNAL-ERR-000.\n");
         exit(1);
     }
 

@@ -41,6 +41,9 @@ ARGS *parseArgs(int argc, char **argv)
         if (!strcmp(*(argv+checkValue), "--key-file"))
             args->keyFile = *(argv+checkValue+1);
 
+        if (!strcmp(*(argv + checkValue), "-o"))
+            args->keyFile = *(argv+checkValue+1);
+
         if (!strcmp(*(argv+checkValue), "--decrypt"))
             args->doEncrypt = 0;
 
