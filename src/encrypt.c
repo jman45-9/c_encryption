@@ -46,7 +46,7 @@ int *generateKey()
 
     for (int iii = 0; iii < 127; iii++)
     {
-        int newValue = abs((int)csprng_get_int(rng) % 255);
+        int newValue = abs((int)csprng_get_int(rng) % 65534);
         if (existsInArray(cypherValues, 127, newValue))
             *(cypherValues + iii) = newValue;
         else
