@@ -13,6 +13,7 @@ struct args
 {
     char *targetFile;
     char *keyFile;
+    int doEncrypt;
 };
 
 ARGS *parseArgs(int argc, char **argv);

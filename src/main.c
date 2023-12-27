@@ -24,6 +24,7 @@ ARGS *parseArgs(int argc, char **argv)
     ARGS *args = malloc(sizeof(ARGS));
     args->targetFile = NULL;
     args->keyFile = NULL;
+    args->doEncrypt = 1;
 
     for (checkValue = 1; checkValue < argc; checkValue++)
     {
@@ -31,6 +32,9 @@ ARGS *parseArgs(int argc, char **argv)
             break;
         if (!strcmp(*(argv+checkValue), "--target-file"))
             args->targetFile = *(argv+checkValue+1);
+
+        if (!strcmp(*(argv+checkValue), "--decrypt"))
+            args->doEncrypt = 0;
 
         //later add code to parse a key file too
     }
