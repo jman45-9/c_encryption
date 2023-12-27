@@ -19,7 +19,7 @@ void encryptTarget(char *targetName, char *cypherName, char *outputName)
         cypher = generateCypher();
     /*
      * else
-     * add code to read keyName here
+     * add code to read cypherName here
     */
 
     FILE *targetFile = fopen(targetName, "r");
@@ -66,17 +66,23 @@ int *generateCypher()
     for (int iii = 0; iii < 127; iii++)
         *(cypherValues + iii) = -1;
 
+    FILE *cypherFile = fopen("RENAME_cypherFile.bin", "wb");
+
     for (int iii = 0; iii < 127; iii++)
     {
         int newValue = abs((int)csprng_get_int(rng) % 65534);
-        if (existsInArray(cypherValues, 127, newValue))
+        if (!existsInArray(cypherValues, 127, newValue))
+        {
             *(cypherValues + iii) = newValue;
+            fwrite(&newValue, sizeof(newValue), 1, cypherFile);
+        }
         else
         {
             iii--;
             continue;
         }
     }
+    fclose(cypherFile);
     return cypherValues;
 }
 
@@ -85,8 +91,8 @@ int existsInArray(int *array, int arrayLength, int value)
     for (int iii = 0; iii < arrayLength; iii++)
     {
         if (*(array+iii) == value)
-            return 0;
+            return 1;
     }
-    return 1;
+    return 0;
 }
   
