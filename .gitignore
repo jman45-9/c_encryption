@@ -2,6 +2,9 @@ bin/
 *.swp
 *.swo
 node_modules/
+testFile.txt
+encryptionOutput.bin
+
 
 # Prerequisites
 *.d
