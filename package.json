@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "prettier": "3.1.1"
+  },
+  "dependencies": {
+    "package.json": "^2.0.1"
   }
 }
