@@ -12,17 +12,25 @@
  * @param targetName - name of file to be encrypted
  * @param keyName - name of file containg encryption key, pass NULL is no file exists
 */
-void encryptTarget(char *targetName, char *keyName)
+void encryptTarget(char *targetName, char *keyName, char *outputName)
 {
-    int *cypher = malloc(sizeof(int)*127);
-
+    int *cypher;
     if (keyName == NULL)
-        generateKey();
+        cypher = generateKey();
+    /*
+     * else
+     * add code to read keyName here
+    */
 
+    FILE *targetFile = fopen(targetName, "r");
+    FILE *outputFile = fopen(outputName, "wb");
+
+    fclose(targetFile);
+    fclose(outputFile);
     free(cypher);
 }
 
-void generateKey()
+int *generateKey()
 {
     CSPRNG rng = csprng_create(rng); //ignore warning on this line :)
     if(!rng)
@@ -32,6 +40,7 @@ void generateKey()
     }
 
     int *cypherValues = malloc(127*sizeof(int));
+    // init cypherValues with -1 in all indexi
     for (int iii = 0; iii < 127; iii++)
         *(cypherValues + iii) = -1;
 
@@ -45,9 +54,8 @@ void generateKey()
             iii--;
             continue;
         }
-        printf("test,%d: %d\n", iii, newValue);
-        
     }
+    return cypherValues;
 }
 
 int existsInArray(int *array, int arrayLength, int value)

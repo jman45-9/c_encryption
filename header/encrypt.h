@@ -6,8 +6,8 @@
 
 #include "../src/duthomhas/csprng.h"
 
-void encryptTarget(char *targetName, char *keyName);
-void generateKey();
+void encryptTarget(char *targetName, char *keyName, char *outputFile);
+int *generateKey();
 
 int existsInArray(int *array, int arrayLength, int value);
 

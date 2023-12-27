@@ -13,6 +13,7 @@ struct args
 {
     char *targetFile;
     char *keyFile;
+    char *outputFile;
     int doEncrypt;
 };
 

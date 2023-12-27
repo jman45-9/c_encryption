@@ -17,7 +17,7 @@ int main(int argc, char **argv)
        }
 
     if(args->doEncrypt)
-        encryptTarget(args->targetFile, args->keyFile);
+        encryptTarget(args->targetFile, args->keyFile, args->outputFile);
     
     return 0;
 }
@@ -28,6 +28,7 @@ ARGS *parseArgs(int argc, char **argv)
     ARGS *args = malloc(sizeof(ARGS));
     args->targetFile = NULL;
     args->keyFile = NULL;
+    args->outputFile = "encryptionOutput.bin";
     args->doEncrypt = 1;
 
     for (checkValue = 1; checkValue < argc; checkValue++)
