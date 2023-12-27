@@ -4,7 +4,7 @@ SRCS_DIREC = src/
 SRCS := ${wildcard ${SRCS_DIREC}*.c}
 BINARY = cEncryption
 
-compile:
+release:
 	@${CC} ${SRCS} -o bin/${BINARY}-release
 
 debug:
