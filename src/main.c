@@ -3,9 +3,18 @@
 int main(int argc, char **argv)
 {
 
-    ARGS *args = parseArgs(argc, argv);
-    printf("test: %s", args->targetFile);
+    
+    CSPRNG rng = csprng_create( rng ); //ignore warning on this line
+    if(!rng)
+    {
+        fprintf(stderr, "CSPRNG INIT FAILED ERR-000");
+        exit(1);
+    }
 
+    printf("test: %ld\n", csprng_get_int(rng));
+
+
+    rng = csprng_destroy(rng);
     return 0;
 }
 
