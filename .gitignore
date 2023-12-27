@@ -1,6 +1,7 @@
 bin/
 *.swp
 *.swo
+node-modules/
 
 # Prerequisites
 *.d
