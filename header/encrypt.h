@@ -9,5 +9,6 @@
 void encryptTarget(char *targetName, char *keyName);
 void generateKey();
 
+int existsInArray(int *array, int arrayLength, int value);
 
 #endif //C_ENCRYPTION_ENCRYPTH

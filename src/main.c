@@ -12,7 +12,7 @@ int main(int argc, char **argv)
 
     if (args->targetFile == NULL)
        {
-        fprintf(stderr, "FATAL. NO TARGET FILE ENTERED, CHECK ARGUMENTS. ERR-000.\n");
+        fprintf(stderr, "FATAL. NO TARGET FILE ENTERED, CHECK ARGUMENTS. USR-ERR-000.\n");
         exit(1);
        }
 

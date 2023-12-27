@@ -27,13 +27,36 @@ void generateKey()
     CSPRNG rng = csprng_create(rng); //ignore warning on this line :)
     if(!rng)
     {
-        fprintf(stderr, "FATAL. NO CSPRNG FOUND! ERR-001");
+        fprintf(stderr, "FATAL. NO CSPRNG FOUND! INTERNAL-ERR-000");
         exit(1);
     }
 
+    int *cypherValues = malloc(127*sizeof(int));
+    for (int iii = 0; iii < 127; iii++)
+        *(cypherValues + iii) = -1;
+
     for (int iii = 0; iii < 127; iii++)
     {
-        int cypherValue = abs((int)csprng_get_int(rng) % 255);
-        printf("test: %d\n", cypherValue);
+        int newValue = abs((int)csprng_get_int(rng) % 255);
+        if (existsInArray(cypherValues, 127, newValue))
+            *(cypherValues + iii) = newValue;
+        else
+        {
+            iii--;
+            continue;
+        }
+        printf("test,%d: %d\n", iii, newValue);
+        
     }
 }
+
+int existsInArray(int *array, int arrayLength, int value)
+{
+    for (int iii = 0; iii < arrayLength; iii++)
+    {
+        if (*(array+iii) == value)
+            return 0;
+    }
+    return 1;
+}
+  
