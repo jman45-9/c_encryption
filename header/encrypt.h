@@ -7,5 +7,7 @@
 #include "../src/duthomhas/csprng.h"
 
 void encryptTarget(char *targetName, char *keyName);
+void generateKey();
+
 
 #endif //C_ENCRYPTION_ENCRYPTH
