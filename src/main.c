@@ -16,8 +16,16 @@ int main(int argc, char **argv)
         exit(1);
        }
 
+    if (args->cypherFile == NULL && !args->doEncrypt)
+    {
+        fprintf(stderr, "FATAL. CYPHER MUST BE PROVIDED FOR DECRYPTION. USR-ERR-004.\n");
+        exit(1);
+    }
+
     if(args->doEncrypt)
         encryptTarget(args->targetFile, args->cypherFile, args->outputFile);
+    else
+        decryptTarget(args->targetFile, args->cypherFile, args->outputFile);
     
     return 0;
 }

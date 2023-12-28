@@ -6,6 +6,7 @@
 #include <string.h>
 
 #include "encrypt.h"
+#include "decrypt.h"
 
 typedef struct args ARGS;
 
