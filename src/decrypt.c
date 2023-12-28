@@ -20,5 +20,20 @@ void decryptTarget(char *targetName, char *cypherName, char *outputFile)
         fread((cypher+iii), sizeof(int), 1, cypherFile);
     fclose(cypherFile);
 
+    FILE *targetFile = fopen(targetName, "rb");
+    if(!targetFile)
+    {
+        fprintf(stderr, "FATAL. TARGET NOT FOUND. USR-ERR-005.\n");
+        exit(1);
+    }
+    FILE *output = fopen(outputFile, "w");
+    if(!output)
+    {
+        fprintf(stderr, "FATAL. FAILED TO CREATE OUTPUT. INTERNAL-ERR-002.\n"); 
+        exit(1);
+    }
+
+    fclose(targetFile);
+    fclose(output);
     free(cypher);
 }
